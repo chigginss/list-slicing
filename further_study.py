@@ -28,6 +28,10 @@ def custom_len(input_list):
 
         >>> custom_len(['Do', 'Re', 'Mi', 'Fa', 'So', 'La', 'Ti', 'Do'])
         8
+        >>> custom_len([])
+        0
+        >>> custom_len("hello")
+        5
 
     """
     count = 0
@@ -100,7 +104,12 @@ def custom_insert(input_list, index, value):
 
     """
 
-    input_list[index:index+1] = [value, input_list[index]]
+    if index > len(input_list):
+        custom_append(input_list, value)
+    else:
+        input_list[index:index+1] = [value, input_list[index]]
+        if index < 0:
+            custom_pop(input_list)
 
 
 def custom_remove(input_list, value):
@@ -241,9 +250,11 @@ def custom_equality(some_list, another_list):
         False
 
     """
-    for i in range(custom_len(some_list)):
-        if some_list[i] != another_list[i]:
+    count = 0
+    for i in some_list:
+        if i != another_list[count]:
             return False
+        count += 1
 
     return True
 
