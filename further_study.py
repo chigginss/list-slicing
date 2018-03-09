@@ -104,12 +104,14 @@ def custom_insert(input_list, index, value):
 
     """
 
-    if index > len(input_list):
+    if index > custom_len(input_list):
         custom_append(input_list, value)
+    elif index < 0:
+        input_list[index:index+1] = [input_list[index], value]
+        if index == -1:
+            custom_pop(input_list)
     else:
         input_list[index:index+1] = [value, input_list[index]]
-        if index < 0:
-            custom_pop(input_list)
 
 
 def custom_remove(input_list, value):
@@ -132,6 +134,7 @@ def custom_remove(input_list, value):
         if input_list[index] == value:
             input_list[index:index+1] = []
             break
+    raise ValueError, "value is not in list"
 
 
 def custom_pop(input_list):
